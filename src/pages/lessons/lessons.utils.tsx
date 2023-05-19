@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { propertiesToLowerCase } from '../../utils';
 import { WordsQueryResponse } from '../word/list/word-list.types';
+import { SentencesQueryResponse } from '../sentences/list/sentence-list.types';
 
 export const NULL = {
   value: 'none',
@@ -22,6 +23,17 @@ export const languageSelectorList = (data: LanguagesQueryResponse) => {
 };
 export const wordListSelectorList = (data?: WordsQueryResponse) => {
   const words = data?.words || [];
+  if (words.length) {
+    const mappedWords = words.map(({ id, original, foreign }) => ({
+      value: id.toString(),
+      label: `${original} - ${foreign}`,
+    }));
+    return [NULL, ...mappedWords];
+  }
+  return [NULL];
+};
+export const sentenceListSelectorList = (data?: SentencesQueryResponse) => {
+  const words = data?.sentences || [];
   if (words.length) {
     const mappedWords = words.map(({ id, original, foreign }) => ({
       value: id.toString(),

@@ -10,24 +10,22 @@ import { Row, Col, Card, Button, Form, Input, Select } from 'antd';
 import styles from './lesson-create.module.scss';
 import { useTranslation } from 'react-i18next';
 import { LessonFields } from './lesson-create.type';
-import { wordListSelectorList, languageSelectorList } from '../lessons.utils';
+import { wordListSelectorList, languageSelectorList, sentenceListSelectorList } from '../lessons.utils';
 import Error from '../../../components/error';
 import { LoadingOutlined } from '@ant-design/icons';
 import { WORDS_QUERY } from '../../word/list/word-list.query';
+import { SENTENCES_QUERY } from '../../sentences/list/sentence-list.query';
 import { WordsQueryResponse } from '../../word/list/word-list.types';
+import { SentencesQueryResponse } from '../../sentences/list/sentence-list.types';
 
 const LessonCreatePage = () => {
   const { t } = useTranslation(['global', 'lesson']);
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const { error, data, loading } =
-    useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
+  const { error, data, loading } = useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
   const { data: wordsData } = useQuery<WordsQueryResponse>(WORDS_QUERY);
-
-  const { data: allQueries } = useQuery<LanguagesQueryResponse>(GET_ALL_QUERY);
-
-  console.log('@@ allQueries', allQueries);
+  const { data: sentenceData } = useQuery<SentencesQueryResponse>(SENTENCES_QUERY);
 
   const [createLesson] = useMutation(LESSON_CREATE_MUTATION, {
     update(_, { data: { createLesson: createLessonData } }) {
@@ -87,6 +85,19 @@ const LessonCreatePage = () => {
                 handleSelectorChange(value, LessonFields.WORDS)
               }
               options={wordListSelectorList(wordsData)}
+            />
+          </Form.Item>
+        );
+      }
+      if (inputName === LessonFields.SENTENCES) {
+        return (
+          <Form.Item label={input} key={inputName} name={inputName}>
+            <Select
+              mode="multiple"
+              onChange={(value) =>
+                handleSelectorChange(value, LessonFields.SENTENCES)
+              }
+              options={sentenceListSelectorList(sentenceData)}
             />
           </Form.Item>
         );

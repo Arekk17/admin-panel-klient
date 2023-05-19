@@ -44,8 +44,8 @@ const App = () => {
 
   return (
     <Routes>
+      <Route path="/" element={<SignInPage />} />
       <Route element={<PrivateRoute />}>
-        <Route path="/" element={<DashboardPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         {/* Landings */}
         <Route path="/landings" element={<LandingListPage />} />
@@ -75,7 +75,6 @@ const App = () => {
         <Route path="/lessons" element={<LessonListPage />} />
         <Route path="/lesson" element={<LessonCreatePage />} />
       </Route>
-      <Route path="/signin" element={<SignInPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
