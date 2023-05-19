@@ -1,1 +1,1 @@
-export { SentenceFields } from "../list/sentence-list.types";
+export { SentenceFields } from '../list/sentence-list.types';

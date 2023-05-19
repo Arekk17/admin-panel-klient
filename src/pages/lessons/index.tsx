@@ -1,4 +1,4 @@
-import LessonListPage from "./list/lesson.list";
-import LessonCreatePage from "./create/lesson-create";
+import LessonListPage from './list/lesson.list';
+import LessonCreatePage from './create/lesson-create';
 
-export { LessonListPage, LessonCreatePage } 
+export { LessonListPage, LessonCreatePage };

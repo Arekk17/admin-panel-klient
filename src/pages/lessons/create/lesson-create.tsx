@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { LESSON_CREATE_MUTATION } from './lesson-create.query';
-import { LANGUAGES_QUERY, GET_ALL_QUERY } from '../../language/list/language-list.query';
+import {
+  LANGUAGES_QUERY,
+  GET_ALL_QUERY,
+} from '../../language/list/language-list.query';
 import type { LanguagesQueryResponse } from '../../language/list/language-list.types';
 import { useNavigate } from 'react-router-dom';
 import { Row, Col, Card, Button, Form, Input, Select } from 'antd';
@@ -18,12 +21,13 @@ const LessonCreatePage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const { error, data, loading } = useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
+  const { error, data, loading } =
+    useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
   const { data: wordsData } = useQuery<WordsQueryResponse>(WORDS_QUERY);
-  
+
   const { data: allQueries } = useQuery<LanguagesQueryResponse>(GET_ALL_QUERY);
 
-  console.log("@@ allQueries", allQueries)
+  console.log('@@ allQueries', allQueries);
 
   const [createLesson] = useMutation(LESSON_CREATE_MUTATION, {
     update(_, { data: { createLesson: createLessonData } }) {
@@ -32,7 +36,7 @@ const LessonCreatePage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   if (error) return <Error />;
@@ -41,20 +45,20 @@ const LessonCreatePage = () => {
   const handleSave = (values: any) => {
     const { name, language, words } = values;
     const variables = {
-        name,
-        wordIds: words ? words.map((id: string) => parseInt(id, 10)) : [],
-        languageId: language === 'none' ? null : parseInt(language, 10)
+      name,
+      wordIds: words ? words.map((id: string) => parseInt(id, 10)) : [],
+      languageId: language === 'none' ? null : parseInt(language, 10),
     };
 
     createLesson({
-      variables: variables
+      variables: variables,
     });
     navigate('/lessons');
   };
 
   const handleSelectorChange = (value: string, selectorName: string) => {
     form.setFieldsValue({
-      [selectorName]: value
+      [selectorName]: value,
     });
   };
 
@@ -66,7 +70,9 @@ const LessonCreatePage = () => {
         return (
           <Form.Item label={input} key={inputName} name={inputName}>
             <Select
-              onChange={(value) => handleSelectorChange(value, LessonFields.LANGUAGE)}
+              onChange={(value) =>
+                handleSelectorChange(value, LessonFields.LANGUAGE)
+              }
               options={languageSelectorList(data!)}
             />
           </Form.Item>
@@ -76,8 +82,10 @@ const LessonCreatePage = () => {
         return (
           <Form.Item label={input} key={inputName} name={inputName}>
             <Select
-                mode='multiple'
-              onChange={(value) => handleSelectorChange(value, LessonFields.WORDS)}
+              mode="multiple"
+              onChange={(value) =>
+                handleSelectorChange(value, LessonFields.WORDS)
+              }
               options={wordListSelectorList(wordsData)}
             />
           </Form.Item>
@@ -99,7 +107,7 @@ const LessonCreatePage = () => {
               <Form
                 initialValues={{
                   language: 'none',
-                  wordgroup: 'none'
+                  wordgroup: 'none',
                 }}
                 autoComplete="off"
                 layout={'vertical'}

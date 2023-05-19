@@ -5,7 +5,7 @@ import {
   FieldStringOutlined,
   RiseOutlined,
   UserOutlined,
-  TableOutlined, 
+  TableOutlined,
 } from '@ant-design/icons';
 import type { SideNavConfig } from './side-nav.types';
 import { getTranslation } from '../../../utils';
@@ -16,42 +16,41 @@ export const sideNavConfig: SideNavConfig = [
   {
     icon: HomeOutlined,
     label: sideNav['home.label'],
-    path: '/dashboard'
+    path: '/dashboard',
   },
   {
     icon: UnorderedListOutlined,
     label: sideNav['landing.label'],
-    path: '/landings'
+    path: '/landings',
   },
   {
     icon: RiseOutlined,
     label: sideNav['level.label'],
-    path: '/levels'
+    path: '/levels',
   },
   {
     icon: FlagOutlined,
     label: sideNav['language.label'],
-    path: '/languages'
+    path: '/languages',
   },
   {
     icon: UserOutlined,
     label: sideNav['user.label'],
-    path: '/users'
+    path: '/users',
   },
   {
     icon: FieldStringOutlined,
     label: sideNav['word.label'],
-    path: '/words'
-    
+    path: '/words',
   },
   {
     icon: FieldStringOutlined,
     label: sideNav['sentence.label'],
-    path: '/sentences'
+    path: '/sentences',
   },
   {
     icon: TableOutlined,
     label: sideNav['lesson.label'],
-    path: '/lessons'
-  }
+    path: '/lessons',
+  },
 ];

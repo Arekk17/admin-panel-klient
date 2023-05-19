@@ -12,8 +12,18 @@ export const LEVEL_GET_BY_ID_QUERY = gql`
 `;
 
 export const LEVEL_EDIT_BY_ID_MUTATION = gql`
-  mutation EditLevel($id: Int!, $name: String, $imageUrl: String, $description: String) {
-    editLevel(id: $id, name: $name, imageUrl: $imageUrl, description: $description) {
+  mutation EditLevel(
+    $id: Int!
+    $name: String
+    $imageUrl: String
+    $description: String
+  ) {
+    editLevel(
+      id: $id
+      name: $name
+      imageUrl: $imageUrl
+      description: $description
+    ) {
       id
       name
       imageUrl

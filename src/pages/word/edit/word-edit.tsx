@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import {
   WORD_DELETE_BY_ID_MUTATION,
   WORD_GET_BY_ID_QUERY,
-  WORD_EDIT_BY_ID_MUTATION
+  WORD_EDIT_BY_ID_MUTATION,
 } from './word-edit.query';
 import { LANGUAGES_QUERY } from '../../language/list/language-list.query';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,17 +25,17 @@ const WordEditPage = () => {
   const {
     loading: languagesLoading,
     error: languagesError,
-    data: languagesData
+    data: languagesData,
     // TODO add better TS
   } = useQuery<any>(LANGUAGES_QUERY);
 
   const {
     loading: wordLoading,
     error: wordError,
-    data: wordData
+    data: wordData,
     // TODO add better TS
   } = useQuery<any>(WORD_GET_BY_ID_QUERY, {
-    variables: { id }
+    variables: { id },
   });
 
   const [editWord] = useMutation(WORD_EDIT_BY_ID_MUTATION, {
@@ -44,7 +44,7 @@ const WordEditPage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   const [deleteWord] = useMutation(WORD_DELETE_BY_ID_MUTATION, {
@@ -54,7 +54,7 @@ const WordEditPage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   if (languagesError || wordError) return <Error />;
@@ -64,17 +64,27 @@ const WordEditPage = () => {
 
   const handleDelete = () => {
     deleteWord({
-      variables: { id }
+      variables: { id },
     });
   };
 
   const handleSave = (values: any) => {
-    const { original, foreign, pronunciation, audiourl, imageurl, wordgroup, language } = values;
+    const {
+      original,
+      foreign,
+      pronunciation,
+      audiourl,
+      imageurl,
+      wordgroup,
+      language,
+    } = values;
     // TODO  create a util function
     let updatedLanguageId;
     if (isNaN(language)) {
       updatedLanguageId =
-        languagesData.languages.find(({ name }: { name: string }) => name === language)?.id || null;
+        languagesData.languages.find(
+          ({ name }: { name: string }) => name === language,
+        )?.id || null;
     } else {
       updatedLanguageId = parseInt(language, 10);
     }
@@ -87,17 +97,17 @@ const WordEditPage = () => {
       audioUrl: audiourl,
       imageUrl: imageurl,
       wordGroup: wordgroup,
-      languageId: updatedLanguageId
+      languageId: updatedLanguageId,
     };
     editWord({
-      variables: variables
+      variables: variables,
     });
     navigate('/words');
   };
 
   const handleSelectorChange = (value: string, selectorName: string) => {
     form.setFieldsValue({
-      [selectorName]: value
+      [selectorName]: value,
     });
   };
 
@@ -108,7 +118,9 @@ const WordEditPage = () => {
       return (
         <Form.Item label={input} key={inputName} name={inputName}>
           <Select
-            onChange={(value) => handleSelectorChange(value, WordFields.WORDGROUP)}
+            onChange={(value) =>
+              handleSelectorChange(value, WordFields.WORDGROUP)
+            }
             options={wordGroupSelectorList()}
           />
         </Form.Item>
@@ -118,7 +130,9 @@ const WordEditPage = () => {
       return (
         <Form.Item label={input} key={inputName} name={inputName}>
           <Select
-            onChange={(value) => handleSelectorChange(value, WordFields.LANGUAGE)}
+            onChange={(value) =>
+              handleSelectorChange(value, WordFields.LANGUAGE)
+            }
             options={languagesList}
           />
         </Form.Item>
@@ -140,7 +154,7 @@ const WordEditPage = () => {
     imageUrl,
     original,
     pronunciation,
-    id: wordId
+    id: wordId,
   } = wordData.word;
 
   return (
@@ -168,7 +182,7 @@ const WordEditPage = () => {
                   original,
                   foreign,
                   imageurl: imageUrl,
-                  audiourl: audioUrl
+                  audiourl: audioUrl,
                 }}
                 autoComplete="off"
                 layout={'vertical'}

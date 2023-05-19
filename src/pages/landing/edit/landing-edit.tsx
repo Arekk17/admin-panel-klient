@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import {
   LANDING_GET_BY_ID_QUERY,
   LANDING_EDIT_BY_ID_MUTATION,
-  LANDING_DELETE_BY_ID_MUTATION
+  LANDING_DELETE_BY_ID_MUTATION,
 } from './landing-edit.query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -46,9 +46,9 @@ const LandingEditPage = () => {
   const {
     loading,
     error: errorQuery,
-    data
+    data,
   } = useQuery(LANDING_GET_BY_ID_QUERY, {
-    variables: { id }
+    variables: { id },
   });
 
   const [editLanding] = useMutation(LANDING_EDIT_BY_ID_MUTATION, {
@@ -58,7 +58,7 @@ const LandingEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   const [deleteLanding] = useMutation(LANDING_DELETE_BY_ID_MUTATION, {
@@ -68,7 +68,7 @@ const LandingEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   useEffect(() => {
@@ -88,13 +88,13 @@ const LandingEditPage = () => {
       title: landing.title,
       name: landing.name,
       slug: landing.slug,
-      content: landing.content
+      content: landing.content,
     });
   }
 
   const handleDelete = () => {
     deleteLanding({
-      variables: { id }
+      variables: { id },
     });
     navigate('/landings');
   };
@@ -120,7 +120,12 @@ const LandingEditPage = () => {
             }
           >
             <div className={styles['landings-table-container']}>
-              <Form autoComplete="off" layout={'vertical'} form={form} onFinish={handleSave}>
+              <Form
+                autoComplete="off"
+                layout={'vertical'}
+                form={form}
+                onFinish={handleSave}
+              >
                 <BuildInputs />
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

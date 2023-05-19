@@ -15,5 +15,5 @@ export enum LandingFields {
   NAME = 'Name',
   TITLE = 'Title',
   SLUG = 'Slug',
-  CONTENT = 'Content'
+  CONTENT = 'Content',
 }

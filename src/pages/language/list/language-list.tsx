@@ -13,7 +13,8 @@ import { shapePagesColumns } from '../../../utils';
 
 const LanguageListPage = () => {
   const { t } = useTranslation(['global', 'language']);
-  const { loading, error, data } = useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
+  const { loading, error, data } =
+    useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
 
   if (loading) return <LoadingOutlined />;
   if (error) return <Error />;
@@ -41,7 +42,7 @@ const LanguageListPage = () => {
                 columns={tableColumns}
                 dataSource={tableDataSource}
                 pagination={{
-                  position: ['bottomCenter']
+                  position: ['bottomCenter'],
                 }}
                 className="ant-border-space"
               />

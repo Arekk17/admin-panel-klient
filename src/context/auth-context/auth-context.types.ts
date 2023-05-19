@@ -22,13 +22,13 @@ export enum ROLE {
   User = 'USER',
   Admin = 'ADMIN',
   Moderator = 'MODERATOR',
-  Teacher = 'TEACHER'
+  Teacher = 'TEACHER',
 }
 
 export enum ACTION_TYPE {
   LOGIN = 'LOGIN',
   LOGOUT = 'LOGOUT',
-  GET_STATE = 'GET_STATE'
+  GET_STATE = 'GET_STATE',
 }
 export type SigninUserData = {
   token: string;
@@ -43,5 +43,5 @@ export type AuthReducerProperties = (
   action: {
     type: keyof typeof ACTION_TYPE;
     payload?: any;
-  }
+  },
 ) => any;

@@ -41,7 +41,7 @@ const LessonListPage = () => {
                 columns={tableColumns}
                 dataSource={tableDataSource}
                 pagination={{
-                  position: ['bottomCenter']
+                  position: ['bottomCenter'],
                 }}
                 className="ant-border-space"
               />

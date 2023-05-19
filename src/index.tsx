@@ -7,7 +7,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/auth-context';
 import './i18n';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+);
 root.render(
   <React.StrictMode>
     <AuthProvider>
@@ -17,5 +19,5 @@ root.render(
         </BrowserRouter>
       </ApolloProvider>
     </AuthProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

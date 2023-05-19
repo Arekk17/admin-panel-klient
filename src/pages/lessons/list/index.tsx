@@ -1,1 +1,1 @@
-export { default } from './lesson.list'
+export { default } from './lesson.list';

@@ -1,14 +1,14 @@
 export default {
   en: {
     welcome: 'Hello',
-    logout: 'Logout'
+    logout: 'Logout',
   },
   pl: {
     welcome: 'Witaj',
-    logout: 'Wyloguj'
+    logout: 'Wyloguj',
   },
   pt: {
     welcome: 'Olá',
-    logout: 'Sair'
-  }
+    logout: 'Sair',
+  },
 };

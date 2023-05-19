@@ -10,7 +10,7 @@ const SideNav = () => {
   const items = sideNavConfig.map(({ icon: Icon, path, label }) => ({
     key: path,
     label: <Link to={path}>{label}</Link>,
-    icon: <Icon />
+    icon: <Icon />,
   }));
 
   return (

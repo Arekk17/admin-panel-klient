@@ -19,6 +19,6 @@ export const shapeLandingsData = (landings: any) =>
         <Link to={`/language/${id}`}>
           <Button icon={<EditOutlined />} />
         </Link>
-      )
+      ),
     }))
     .reverse();

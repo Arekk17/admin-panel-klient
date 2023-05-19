@@ -1,1 +1,1 @@
-export { default } from './sentence-list'
+export { default } from './sentence-list';

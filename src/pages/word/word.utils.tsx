@@ -7,13 +7,13 @@ import { propertiesToLowerCase } from '../../utils';
 
 export const NULL = {
   value: 'none',
-  label: 'NULL'
+  label: 'NULL',
 };
 
 export const wordGroupSelectorList = () => {
   const group = Object.values(WORDGROUP).map((type) => ({
     value: type,
-    label: type
+    label: type,
   }));
 
   return [NULL, ...group];
@@ -23,7 +23,7 @@ export const languageSelectorList = (data: LanguagesQueryResponse) => {
   if (data.languages.length) {
     const mappedLanguages = data.languages.map(({ id, name }) => ({
       value: id.toString(),
-      label: name
+      label: name,
     }));
     return [NULL, ...mappedLanguages];
   }
@@ -33,7 +33,16 @@ export const languageSelectorList = (data: LanguagesQueryResponse) => {
 export const shapeWordsData = (words: any) =>
   propertiesToLowerCase(words)
     .map(
-      ({ id, original, foreign, pronunciation, audiourl, imageurl, wordgroup, language }: any) => ({
+      ({
+        id,
+        original,
+        foreign,
+        pronunciation,
+        audiourl,
+        imageurl,
+        wordgroup,
+        language,
+      }: any) => ({
         id,
         original,
         foreign,
@@ -57,7 +66,7 @@ export const shapeWordsData = (words: any) =>
           <Link to={`/word/${id}`}>
             <Button icon={<EditOutlined />} />
           </Link>
-        )
-      })
+        ),
+      }),
     )
     .reverse();

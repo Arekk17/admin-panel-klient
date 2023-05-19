@@ -13,7 +13,8 @@ import { useTranslation } from 'react-i18next';
 
 const SentenceListPage = () => {
   const { t } = useTranslation('global');
-  const { loading, error, data } = useQuery<SentencesQueryResponse>(SENTENCES_QUERY);
+  const { loading, error, data } =
+    useQuery<SentencesQueryResponse>(SENTENCES_QUERY);
 
   if (loading) return <LoadingOutlined />;
   if (error) return <Error />;
@@ -41,7 +42,7 @@ const SentenceListPage = () => {
                 columns={tableColumns}
                 dataSource={tableDataSource}
                 pagination={{
-                  position: ['bottomCenter']
+                  position: ['bottomCenter'],
                 }}
                 className="ant-border-space"
               />

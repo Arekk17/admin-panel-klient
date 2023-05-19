@@ -3,7 +3,11 @@ import { useQuery, useMutation } from '@apollo/client';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Row, Col, Card, Button, Form, Input } from 'antd';
 import { useParams, useNavigate } from 'react-router-dom';
-import { USER_GET_BY_ID_QUERY, USER_EDIT_BY_ID_MUTATION, USER_DELETE_BY_ID_MUTATION } from './user-edit.query';
+import {
+  USER_GET_BY_ID_QUERY,
+  USER_EDIT_BY_ID_MUTATION,
+  USER_DELETE_BY_ID_MUTATION,
+} from './user-edit.query';
 import { UserFields } from './user-edit.types';
 import Error from '../../../components/error';
 import styles from './user-edit.module.scss';
@@ -13,8 +17,8 @@ const BuildInputs = () => {
   const inputs = Object.values(UserFields).map((input) => {
     const inputName = input.toLocaleLowerCase();
     const isDisabled = input === UserFields.ID;
-    if(input === UserFields.ROLE){
-      return null
+    if (input === UserFields.ROLE) {
+      return null;
     }
     return (
       <Form.Item label={input} key={inputName} name={inputName}>
@@ -30,14 +34,14 @@ const UserEditPage = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation(['global', 'user'])
+  const { t } = useTranslation(['global', 'user']);
 
   const {
     loading,
     error: errorQuery,
-    data
+    data,
   } = useQuery(USER_GET_BY_ID_QUERY, {
-    variables: { id }
+    variables: { id },
   });
 
   const [editUser] = useMutation(USER_EDIT_BY_ID_MUTATION, {
@@ -48,7 +52,7 @@ const UserEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   const [deleteUser] = useMutation(USER_DELETE_BY_ID_MUTATION, {
@@ -59,7 +63,7 @@ const UserEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   useEffect(() => {
@@ -80,27 +84,27 @@ const UserEditPage = () => {
       surname: user.surname,
       email: user.email,
       phoneNumber: user.phoneNumber,
-      phonePrefix: user.phonePrefix
+      phonePrefix: user.phonePrefix,
     });
   }
 
   const handleDelete = () => {
     deleteUser({
-      variables: { id }
+      variables: { id },
     });
   };
 
   const handleSave = (values: any) => {
     editUser({ variables: { id, ...values } });
   };
-  
+
   return (
     <div>
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
           <Card
             bordered={false}
-            title={`${t('user-header', { ns: 'user'})}: ${user.name}`}
+            title={`${t('user-header', { ns: 'user' })}: ${user.name}`}
             extra={
               <>
                 <Button type="primary" danger onClick={handleDelete}>
@@ -110,7 +114,12 @@ const UserEditPage = () => {
             }
           >
             <div className={styles['user-table-container']}>
-              <Form autoComplete="off" layout={'vertical'} form={form} onFinish={handleSave}>
+              <Form
+                autoComplete="off"
+                layout={'vertical'}
+                form={form}
+                onFinish={handleSave}
+              >
                 <BuildInputs />
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
@@ -126,4 +135,4 @@ const UserEditPage = () => {
   );
 };
 
-export default UserEditPage
+export default UserEditPage;

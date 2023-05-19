@@ -13,8 +13,20 @@ export const LANDING_GET_BY_ID_QUERY = gql`
 `;
 
 export const LANDING_EDIT_BY_ID_MUTATION = gql`
-  mutation EditLanding($id: Int!, $title: String, $name: String, $slug: String, $content: String) {
-    editLanding(id: $id, title: $title, name: $name, slug: $slug, content: $content) {
+  mutation EditLanding(
+    $id: Int!
+    $title: String
+    $name: String
+    $slug: String
+    $content: String
+  ) {
+    editLanding(
+      id: $id
+      title: $title
+      name: $name
+      slug: $slug
+      content: $content
+    ) {
       id
       title
       name

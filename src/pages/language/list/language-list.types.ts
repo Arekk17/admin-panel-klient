@@ -11,5 +11,5 @@ export type LanguagesQueryResponse = {
 export enum LanguageFields {
   ID = 'Id',
   NAME = 'Name',
-  LOGO = 'Logo'
+  LOGO = 'Logo',
 }

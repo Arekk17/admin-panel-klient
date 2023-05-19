@@ -13,5 +13,5 @@ export enum LevelFields {
   ID = 'id',
   NAME = 'name',
   IMAGEURL = 'imageurl',
-  DESCRIPTION = 'description'
+  DESCRIPTION = 'description',
 }

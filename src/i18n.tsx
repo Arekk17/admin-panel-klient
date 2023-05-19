@@ -9,8 +9,8 @@ import landing from './pages/landing/landing.trans';
 import word from './pages/word/word.trans';
 import level from './pages/level/level.trans';
 import user from './pages/users/user.trans';
-import sentence from './pages/sentences/sentence.trans'
-import lesson from './pages/lessons/lesson.trans'
+import sentence from './pages/sentences/sentence.trans';
+import lesson from './pages/lessons/lesson.trans';
 import globalTranslation from './translation';
 
 import sideNav from './components/layouts/side-nav/side-nav.trans';
@@ -31,13 +31,12 @@ export const resources = ['en', 'pl', 'pt'].reduce(
       user: user[val as keyof typeof user],
       sentence: sentence[val as keyof typeof sentence],
       lesson: lesson[val as keyof typeof lesson],
-
-    }
+    },
   }),
-  {}
+  {},
 );
 
 i18n.use(LanguageDetector).use(initReactI18next).init({
   returnNull: false,
-  resources
+  resources,
 });

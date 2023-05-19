@@ -32,15 +32,15 @@ const LevelCreatePage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   const handleSave = (values: any) => {
     createLevel({
       variables: {
         ...values,
-        imageUrl: values.imageurl
-      }
+        imageUrl: values.imageurl,
+      },
     });
     navigate('/levels');
   };
@@ -51,7 +51,12 @@ const LevelCreatePage = () => {
         <Col xs="24" xl={24}>
           <Card bordered={false} title={t('level-header', { ns: 'level' })}>
             <div className={styles['landings-table-container']}>
-              <Form autoComplete="off" layout={'vertical'} form={form} onFinish={handleSave}>
+              <Form
+                autoComplete="off"
+                layout={'vertical'}
+                form={form}
+                onFinish={handleSave}
+              >
                 <BuildInputs />
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

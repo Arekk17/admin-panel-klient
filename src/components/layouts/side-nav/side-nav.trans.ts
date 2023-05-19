@@ -8,7 +8,6 @@ export default {
     'user.label': 'Users',
     'sentence.label': 'Sentences',
     'lesson.label': 'Lessons',
-
   },
   pl: {
     'home.label': 'Strona główna',
@@ -19,7 +18,6 @@ export default {
     'user.label': 'Użytkownicy',
     'sentence.label': 'Zdania',
     'lesson.label': 'Lekcje',
-
   },
   pt: {
     'home.label': 'Início',
@@ -30,5 +28,5 @@ export default {
     'user.label': 'Usuários',
     'sentence.label': 'Frases',
     'lesson.label': 'Lições',
-  }
+  },
 };

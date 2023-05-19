@@ -31,13 +31,13 @@ const SignInPage: React.FC = () => {
     },
     onError({ graphQLErrors }) {
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   const emailValidationSchema = Yup.object().shape({
     email: Yup.string()
       .email(t('email-incorrect-text') || '')
-      .required(t('email-validation-text-2') || '')
+      .required(t('email-validation-text-2') || ''),
   });
 
   const onFinishFailed = (errorInfo: any) => {
@@ -50,7 +50,7 @@ const SignInPage: React.FC = () => {
       .validate(values, { abortEarly: false })
       .then(() => {
         signinUser({
-          variables: { email, password }
+          variables: { email, password },
         });
       })
       .catch((errors) => setErrorMessage(errors.errors[0]));
@@ -81,7 +81,9 @@ const SignInPage: React.FC = () => {
           <Form.Item
             name="email"
             className="email"
-            rules={[{ required: true, message: t('email-validation-text') || '' }]}
+            rules={[
+              { required: true, message: t('email-validation-text') || '' },
+            ]}
           >
             <Input className={styles['email-input']} placeholder="Email" />
           </Form.Item>
@@ -92,7 +94,9 @@ const SignInPage: React.FC = () => {
           <Form.Item
             name="password"
             className="password"
-            rules={[{ required: true, message: t('password-validation-text') || '' }]}
+            rules={[
+              { required: true, message: t('password-validation-text') || '' },
+            ]}
           >
             <Input.Password
               className={styles['password-input']}
@@ -108,9 +112,16 @@ const SignInPage: React.FC = () => {
         )}
 
         <div className="remember-switch">
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ span: 16 }}>
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{ span: 16 }}
+          >
             <>
-              <Switch checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />{' '}
+              <Switch
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+              />{' '}
               {t('remember-label')}
             </>
           </Form.Item>
@@ -118,7 +129,11 @@ const SignInPage: React.FC = () => {
 
         <div className="signin-button">
           <Form.Item wrapperCol={{ span: 16 }}>
-            <Button type="primary" htmlType="submit" className={styles['button-form']}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className={styles['button-form']}
+            >
               {t('signin-header')}
             </Button>
           </Form.Item>

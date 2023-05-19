@@ -21,15 +21,15 @@ export const shapePagesColumns = (fields: any) => {
   const columns = Object.values(fields).map((column: any) => ({
     title: column.toLocaleLowerCase(),
     dataIndex: column.toLocaleLowerCase(),
-    key: column
+    key: column,
   }));
   return [
     ...columns,
     {
       title: 'edit',
       dataIndex: 'edit',
-      key: 'Edit'
-    }
+      key: 'Edit',
+    },
   ];
 };
 
@@ -43,7 +43,7 @@ export const shapeData = (data: any, path: string) =>
           <Link to={`/${path}/${item.id}`}>
             <Button icon={<EditOutlined />} />
           </Link>
-        )
+        ),
       };
       return shapedObject;
     })

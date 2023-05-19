@@ -1,1 +1,1 @@
-export { UserFields } from '../list/user-list.types'
+export { UserFields } from '../list/user-list.types';

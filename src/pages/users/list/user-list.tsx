@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 const UsersListPage = () => {
   const { loading, error, data } = useQuery<UsersQueryResponse>(USERS_QUERY);
-  const { t } = useTranslation(['global', 'user'])
+  const { t } = useTranslation(['global', 'user']);
 
   if (loading) return <LoadingOutlined />;
   if (error) return <Error />;
@@ -25,20 +25,21 @@ const UsersListPage = () => {
         <Col xs="24" xl={24}>
           <Card
             bordered={false}
-            title={t('users-header', { ns: 'user'})}
+            title={t('users-header', { ns: 'user' })}
             extra={
               <>
                 <Link to="/user">
                   <Button type="primary">{t('add')}</Button>
                 </Link>
               </>
-            }>
+            }
+          >
             <div className={styles['users-table-container']}>
               <Table
                 columns={tableColumns}
                 dataSource={tableDataSource}
                 pagination={{
-                  position: ['bottomCenter']
+                  position: ['bottomCenter'],
                 }}
                 className="ant-border-space"
               />

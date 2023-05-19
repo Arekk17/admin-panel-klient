@@ -1,14 +1,14 @@
 export default {
   en: {
     'levels-header': 'Levels',
-    'level-header': 'Level'
+    'level-header': 'Level',
   },
   pl: {
     'levels-header': 'Poziomy',
-    'level-header': 'Poziom'
+    'level-header': 'Poziom',
   },
   pt: {
     'levels-header': 'Níveis',
-    'level-header': 'Nível'
-  }
+    'level-header': 'Nível',
+  },
 };

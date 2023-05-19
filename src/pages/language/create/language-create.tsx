@@ -20,24 +20,24 @@ const LanguageCreatePage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   const handleSelectorChange = (value: string) => {
     form.setFieldsValue({
-      language: value
+      language: value,
     });
   };
 
   const handleSave = (values: any) => {
     const { name, logo }: any = languageSelectorList().find(
-      (item) => item.label === values.langauge
+      (item) => item.label === values.langauge,
     );
     createLanguage({
       variables: {
         name,
-        logo
-      }
+        logo,
+      },
     });
   };
 
@@ -45,7 +45,10 @@ const LanguageCreatePage = () => {
     <div>
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
-          <Card bordered={false} title={t('language-header', { ns: 'language' })}>
+          <Card
+            bordered={false}
+            title={t('language-header', { ns: 'language' })}
+          >
             <div className={styles['languages-table-container']}>
               <p>{t('available-languages-header', { ns: 'language' })}</p>
               <Form
@@ -56,7 +59,10 @@ const LanguageCreatePage = () => {
                 initialValues={{ name: 'English' }}
               >
                 <Form.Item name="langauge">
-                  <Select onChange={handleSelectorChange} options={languageSelectorList()} />
+                  <Select
+                    onChange={handleSelectorChange}
+                    options={languageSelectorList()}
+                  />
                 </Form.Item>
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

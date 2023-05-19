@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const SENTENCES_QUERY = gql`
-query Sentences {
+  query Sentences {
     sentences {
       audioUrl
       foreign
@@ -19,4 +19,4 @@ query Sentences {
       }
     }
   }
-`
+`;

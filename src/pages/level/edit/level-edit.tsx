@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import {
   LEVEL_GET_BY_ID_QUERY,
   LEVEL_EDIT_BY_ID_MUTATION,
-  LEVEL_DELETE_BY_ID_MUTATION
+  LEVEL_DELETE_BY_ID_MUTATION,
 } from './level-edit.query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -38,9 +38,9 @@ const LevelEditPage = () => {
   const {
     loading,
     error: errorQuery,
-    data
+    data,
   } = useQuery(LEVEL_GET_BY_ID_QUERY, {
-    variables: { id }
+    variables: { id },
   });
 
   const [editLevel] = useMutation(LEVEL_EDIT_BY_ID_MUTATION, {
@@ -50,7 +50,7 @@ const LevelEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   const [deleteLevel] = useMutation(LEVEL_DELETE_BY_ID_MUTATION, {
@@ -60,7 +60,7 @@ const LevelEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   useEffect(() => {
@@ -73,20 +73,20 @@ const LevelEditPage = () => {
   if (errorMessage) return <Error errorMessage={errorMessage} />;
 
   const { level } = data;
-  console.log("@@ level", level)
+  console.log('@@ level', level);
 
   if (level.id) {
     form.setFieldsValue({
       id: level.id,
       name: level.name,
       imageurl: level.imageUrl,
-      description: level.description
+      description: level.description,
     });
   }
 
   const handleDelete = () => {
     deleteLevel({
-      variables: { id }
+      variables: { id },
     });
     navigate('/levels');
   };
@@ -112,7 +112,12 @@ const LevelEditPage = () => {
             }
           >
             <div className={styles['levels-table-container']}>
-              <Form autoComplete="off" layout={'vertical'} form={form} onFinish={handleSave}>
+              <Form
+                autoComplete="off"
+                layout={'vertical'}
+                form={form}
+                onFinish={handleSave}
+              >
                 <BuildInputs />
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

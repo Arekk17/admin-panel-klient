@@ -4,12 +4,17 @@ import jwtDecode from 'jwt-decode';
 import type {
   AuthProviderProperties,
   AuthState,
-  AuthReducerProperties
+  AuthReducerProperties,
 } from './auth-context.types';
-import { ACTION_TYPE, DecodedToken, LoginProperties, SigninUserData } from './auth-context.types';
+import {
+  ACTION_TYPE,
+  DecodedToken,
+  LoginProperties,
+  SigninUserData,
+} from './auth-context.types';
 
 const initialState: AuthState = {
-  user: null
+  user: null,
 };
 
 const theToken = Cookie.get('token');
@@ -20,7 +25,7 @@ if (theToken) {
   initialState.user = {
     userId,
     role,
-    name: ''
+    name: '',
   };
 }
 
@@ -28,7 +33,7 @@ const AuthContext = createContext({
   user: null,
   login: (signinUserData: SigninUserData) => {},
   logout: () => {},
-  getState: () => {}
+  getState: () => {},
 });
 
 const authReducer: AuthReducerProperties = (state, action) => {
@@ -36,17 +41,17 @@ const authReducer: AuthReducerProperties = (state, action) => {
     case ACTION_TYPE.LOGIN:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     case ACTION_TYPE.LOGOUT:
       return {
         ...state,
-        user: null
+        user: null,
       };
     case ACTION_TYPE.GET_STATE:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     default:
       return state;
@@ -62,15 +67,15 @@ const AuthProvider = ({ children }: AuthProviderProperties) => {
     dispatch({
       type: ACTION_TYPE.LOGIN,
       payload: {
-        ...jwtDecode<AuthState['user']>(token)
-      }
+        ...jwtDecode<AuthState['user']>(token),
+      },
     });
   };
 
   const logout = (): void => {
     Cookie.remove('token');
     dispatch({
-      type: ACTION_TYPE.LOGOUT
+      type: ACTION_TYPE.LOGOUT,
     });
   };
 
@@ -79,7 +84,7 @@ const AuthProvider = ({ children }: AuthProviderProperties) => {
     const payload = jwtDecode<AuthState['user']>(tokenCookie!);
     dispatch({
       type: ACTION_TYPE.GET_STATE,
-      payload
+      payload,
     });
   };
 

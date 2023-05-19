@@ -1,11 +1,11 @@
 export default {
   en: {
-    'landings-header': 'Landings'
+    'landings-header': 'Landings',
   },
   pl: {
-    'landings-header': 'Landingi'
+    'landings-header': 'Landingi',
   },
   pt: {
-    'landings-header': 'Landings'
-  }
+    'landings-header': 'Landings',
+  },
 };

@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import {
   LANGUAGE_GET_BY_ID_QUERY,
   LANGUAGE_EDIT_BY_ID_MUTATION,
-  LANGUAGE_DELTE_BY_ID_MUTATION
+  LANGUAGE_DELTE_BY_ID_MUTATION,
 } from './language-edit.query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -37,9 +37,9 @@ const LanguageEditPage = () => {
   const {
     loading,
     error: errorQuery,
-    data
+    data,
   } = useQuery(LANGUAGE_GET_BY_ID_QUERY, {
-    variables: { id }
+    variables: { id },
   });
 
   const [editLanguage] = useMutation(LANGUAGE_EDIT_BY_ID_MUTATION, {
@@ -50,7 +50,7 @@ const LanguageEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   const [deleteLanguage] = useMutation(LANGUAGE_DELTE_BY_ID_MUTATION, {
@@ -61,7 +61,7 @@ const LanguageEditPage = () => {
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
       setErrorMessage(graphQLErrors[0].message);
-    }
+    },
   });
 
   useEffect(() => {
@@ -79,13 +79,13 @@ const LanguageEditPage = () => {
     form.setFieldsValue({
       id: language.id,
       name: language.name,
-      logo: language.logo
+      logo: language.logo,
     });
   }
 
   const handleDelete = () => {
     deleteLanguage({
-      variables: { id }
+      variables: { id },
     });
   };
 
@@ -99,7 +99,9 @@ const LanguageEditPage = () => {
         <Col xs="24" xl={24}>
           <Card
             bordered={false}
-            title={`${t('language-header', { ns: 'language' })}: ${language.name}`}
+            title={`${t('language-header', { ns: 'language' })}: ${
+              language.name
+            }`}
             extra={
               <>
                 <Button type="primary" danger onClick={handleDelete}>
@@ -109,7 +111,12 @@ const LanguageEditPage = () => {
             }
           >
             <div className={styles['languages-table-container']}>
-              <Form autoComplete="off" layout={'vertical'} form={form} onFinish={handleSave}>
+              <Form
+                autoComplete="off"
+                layout={'vertical'}
+                form={form}
+                onFinish={handleSave}
+              >
                 <BuildInputs />
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

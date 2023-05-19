@@ -1,1 +1,1 @@
-export { default } from './user-create'
+export { default } from './user-create';

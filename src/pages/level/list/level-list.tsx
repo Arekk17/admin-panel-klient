@@ -39,7 +39,7 @@ const LevelListPage = () => {
                 columns={tableColumns}
                 dataSource={tableDataSource}
                 pagination={{
-                  position: ['bottomCenter']
+                  position: ['bottomCenter'],
                 }}
                 className="ant-border-space"
               />

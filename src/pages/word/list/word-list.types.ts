@@ -20,5 +20,5 @@ export enum WordFields {
   AUDIOURL = 'audiourl',
   IMAGEURL = 'imageurl',
   WORDGROUP = 'wordgroup',
-  LANGUAGE = 'language'
+  LANGUAGE = 'language',
 }

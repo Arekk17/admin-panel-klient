@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client';
 import {
-    SENTENCE_GET_BY_ID_QUERY,
-    SENTENCE_EDIT_BY_ID_MUTATION,
-    SENCTENCE_DELETE_BY_ID_MUTATION
+  SENTENCE_GET_BY_ID_QUERY,
+  SENTENCE_EDIT_BY_ID_MUTATION,
+  SENCTENCE_DELETE_BY_ID_MUTATION,
 } from './sentence-edit.query';
 import { LANGUAGES_QUERY } from '../../language/list/language-list.query';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,17 +25,17 @@ const SentenceEditPage = () => {
   const {
     loading: languagesLoading,
     error: languagesError,
-    data: languagesData
+    data: languagesData,
     // TODO add better TS
   } = useQuery<any>(LANGUAGES_QUERY);
 
   const {
     loading: sentenceLoading,
     error: sentenceError,
-    data: sentenceData
+    data: sentenceData,
     // TODO add better TS
   } = useQuery<any>(SENTENCE_GET_BY_ID_QUERY, {
-    variables: { id }
+    variables: { id },
   });
 
   const [editSentence] = useMutation(SENTENCE_EDIT_BY_ID_MUTATION, {
@@ -44,7 +44,7 @@ const SentenceEditPage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   const [deleteSentence] = useMutation(SENCTENCE_DELETE_BY_ID_MUTATION, {
@@ -55,7 +55,7 @@ const SentenceEditPage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   if (languagesError || sentenceError) return <Error />;
@@ -65,17 +65,20 @@ const SentenceEditPage = () => {
 
   const handleDelete = () => {
     deleteSentence({
-      variables: { id }
+      variables: { id },
     });
   };
 
   const handleSave = (values: any) => {
-    const { original, foreign, pronunciation, audiourl, imageurl, language } = values;
+    const { original, foreign, pronunciation, audiourl, imageurl, language } =
+      values;
     // TODO  create a util function
     let updatedLanguageId;
     if (isNaN(language)) {
       updatedLanguageId =
-        languagesData.languages.find(({ name }: { name: string }) => name === language)?.id || null;
+        languagesData.languages.find(
+          ({ name }: { name: string }) => name === language,
+        )?.id || null;
     } else {
       updatedLanguageId = parseInt(language, 10);
     }
@@ -87,17 +90,17 @@ const SentenceEditPage = () => {
       pronunciation,
       audioUrl: audiourl,
       imageUrl: imageurl,
-      languageId: updatedLanguageId
+      languageId: updatedLanguageId,
     };
     editSentence({
-      variables: variables
+      variables: variables,
     });
     navigate('/sentences');
   };
 
   const handleSelectorChange = (value: string, selectorName: string) => {
     form.setFieldsValue({
-      [selectorName]: value
+      [selectorName]: value,
     });
   };
 
@@ -108,7 +111,9 @@ const SentenceEditPage = () => {
       return (
         <Form.Item label={input} key={inputName} name={inputName}>
           <Select
-            onChange={(value) => handleSelectorChange(value, SentenceFields.LANGUAGE)}
+            onChange={(value) =>
+              handleSelectorChange(value, SentenceFields.LANGUAGE)
+            }
             options={languagesList}
           />
         </Form.Item>
@@ -129,7 +134,7 @@ const SentenceEditPage = () => {
     imageUrl,
     original,
     pronunciation,
-    id: SentenceId
+    id: SentenceId,
   } = sentenceData.sentence;
 
   return (
@@ -156,7 +161,7 @@ const SentenceEditPage = () => {
                   original,
                   foreign,
                   imageurl: imageUrl,
-                  audiourl: audioUrl
+                  audiourl: audioUrl,
                 }}
                 autoComplete="off"
                 layout={'vertical'}

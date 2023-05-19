@@ -16,7 +16,8 @@ const WordCreatePage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const { error, data, loading } = useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
+  const { error, data, loading } =
+    useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
 
   const [createWord] = useMutation(WORD_CREATE_MUTATION, {
     update(_, { data: { createWord: createWordData } }) {
@@ -24,14 +25,22 @@ const WordCreatePage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   if (error) return <Error />;
   if (loading) return <LoadingOutlined />;
 
   const handleSave = (values: any) => {
-    const { original, foreign, pronunciation, audiourl, imageurl, wordgroup, language } = values;
+    const {
+      original,
+      foreign,
+      pronunciation,
+      audiourl,
+      imageurl,
+      wordgroup,
+      language,
+    } = values;
     const variables = {
       original,
       foreign,
@@ -39,17 +48,17 @@ const WordCreatePage = () => {
       audioUrl: audiourl,
       imageUrl: imageurl,
       wordGroup: wordgroup,
-      languageId: language === 'none' ? null : parseInt(language, 10)
+      languageId: language === 'none' ? null : parseInt(language, 10),
     };
     createWord({
-      variables: variables
+      variables: variables,
     });
     navigate('/words');
   };
 
   const handleSelectorChange = (value: string, selectorName: string) => {
     form.setFieldsValue({
-      [selectorName]: value
+      [selectorName]: value,
     });
   };
 
@@ -61,7 +70,9 @@ const WordCreatePage = () => {
         return (
           <Form.Item label={input} key={inputName} name={inputName}>
             <Select
-              onChange={(value) => handleSelectorChange(value, WordFields.WORDGROUP)}
+              onChange={(value) =>
+                handleSelectorChange(value, WordFields.WORDGROUP)
+              }
               options={wordGroupSelectorList()}
             />
           </Form.Item>
@@ -71,7 +82,9 @@ const WordCreatePage = () => {
         return (
           <Form.Item label={input} key={inputName} name={inputName}>
             <Select
-              onChange={(value) => handleSelectorChange(value, WordFields.LANGUAGE)}
+              onChange={(value) =>
+                handleSelectorChange(value, WordFields.LANGUAGE)
+              }
               options={languageSelectorList(data!)}
             />
           </Form.Item>
@@ -94,7 +107,7 @@ const WordCreatePage = () => {
               <Form
                 initialValues={{
                   language: 'none',
-                  wordgroup: 'none'
+                  wordgroup: 'none',
                 }}
                 autoComplete="off"
                 layout={'vertical'}

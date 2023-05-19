@@ -40,12 +40,12 @@ const LandingCreatePage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   const handleSave = (values: any) => {
     createLanding({
-      variables: values
+      variables: values,
     });
     navigate('/landings');
   };
@@ -56,7 +56,12 @@ const LandingCreatePage = () => {
         <Col xs="24" xl={24}>
           <Card bordered={false} title={`Landing`}>
             <div className={styles['landings-table-container']}>
-              <Form autoComplete="off" layout={'vertical'} form={form} onFinish={handleSave}>
+              <Form
+                autoComplete="off"
+                layout={'vertical'}
+                form={form}
+                onFinish={handleSave}
+              >
                 <BuildInputs />
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

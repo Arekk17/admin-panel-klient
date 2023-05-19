@@ -19,7 +19,7 @@ export const shapeLandingsData = (landings: any) =>
         <Link to={`/landing/${id}`}>
           <Button icon={<EditOutlined />} />
         </Link>
-      )
+      ),
     }))
     .reverse();
 
@@ -27,14 +27,14 @@ export const shapeLandingsColumns = () => {
   const columns = Object.values(LandingFields).map((column) => ({
     title: column.toLocaleLowerCase(),
     dataIndex: column.toLocaleLowerCase(),
-    key: column
+    key: column,
   }));
   return [
     ...columns,
     {
       title: 'edit',
       dataIndex: 'edit',
-      key: 'Edit'
-    }
+      key: 'Edit',
+    },
   ];
 };

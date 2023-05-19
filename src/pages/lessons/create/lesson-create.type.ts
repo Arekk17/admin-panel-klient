@@ -1,1 +1,1 @@
-export { LessonFields } from '../list/lesson-list.types'
+export { LessonFields } from '../list/lesson-list.types';

@@ -6,14 +6,14 @@ import { propertiesToLowerCase } from '../../utils';
 
 export const NULL = {
   value: 'none',
-  label: 'NULL'
+  label: 'NULL',
 };
 
 export const languageSelectorList = (data: LanguagesQueryResponse) => {
   if (data.languages.length) {
     const mappedLanguages = data.languages.map(({ id, name }) => ({
       value: id.toString(),
-      label: name
+      label: name,
     }));
     return [NULL, ...mappedLanguages];
   }
@@ -23,7 +23,15 @@ export const languageSelectorList = (data: LanguagesQueryResponse) => {
 export const shapeSentencesData = (sentences: any) =>
   propertiesToLowerCase(sentences)
     .map(
-      ({ id, original, foreign, pronunciation, audiourl, lesson, language }: any) => ({
+      ({
+        id,
+        original,
+        foreign,
+        pronunciation,
+        audiourl,
+        lesson,
+        language,
+      }: any) => ({
         id,
         original,
         foreign,
@@ -46,7 +54,7 @@ export const shapeSentencesData = (sentences: any) =>
           <Link to={`/sentence/${id}`}>
             <Button icon={<EditOutlined />} />
           </Link>
-        )
-      })
+        ),
+      }),
     )
     .reverse();

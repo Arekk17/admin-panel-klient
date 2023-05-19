@@ -16,7 +16,8 @@ const SentenceCreatePage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const { error, data, loading } = useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
+  const { error, data, loading } =
+    useQuery<LanguagesQueryResponse>(LANGUAGES_QUERY);
 
   const [createSentence] = useMutation(SENTENCE_CREATE_MUTATION, {
     update(_, { data: { createSentence: createSentenceData } }) {
@@ -25,7 +26,7 @@ const SentenceCreatePage = () => {
     },
     onError({ graphQLErrors }) {
       console.log('graphQLErrors', graphQLErrors);
-    }
+    },
   });
 
   if (error) return <Error />;
@@ -38,17 +39,17 @@ const SentenceCreatePage = () => {
       foreign,
       pronunciation,
       audioUrl: audiourl,
-      languageId: language === 'none' ? null : parseInt(language, 10)
+      languageId: language === 'none' ? null : parseInt(language, 10),
     };
     createSentence({
-      variables: variables
+      variables: variables,
     });
     navigate('/sentences');
   };
 
   const handleSelectorChange = (value: string, selectorName: string) => {
     form.setFieldsValue({
-      [selectorName]: value
+      [selectorName]: value,
     });
   };
 
@@ -60,7 +61,9 @@ const SentenceCreatePage = () => {
         return (
           <Form.Item label={input} key={inputName} name={inputName}>
             <Select
-              onChange={(value) => handleSelectorChange(value, SentenceFields.LANGUAGE)}
+              onChange={(value) =>
+                handleSelectorChange(value, SentenceFields.LANGUAGE)
+              }
               options={languageSelectorList(data!)}
             />
           </Form.Item>
@@ -78,12 +81,15 @@ const SentenceCreatePage = () => {
     <div>
       <Row gutter={[24, 0]}>
         <Col xs="24" xl={24}>
-          <Card bordered={false} title={t('sentence-header', { ns: 'sentence' })}>
+          <Card
+            bordered={false}
+            title={t('sentence-header', { ns: 'sentence' })}
+          >
             <div className={styles['sentences-table-container']}>
               <Form
                 initialValues={{
                   language: 'none',
-                  wordgroup: 'none'
+                  wordgroup: 'none',
                 }}
                 autoComplete="off"
                 layout={'vertical'}

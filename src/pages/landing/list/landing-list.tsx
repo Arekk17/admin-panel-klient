@@ -11,7 +11,8 @@ import { useTranslation } from 'react-i18next';
 
 const LandingListPage = () => {
   const { t } = useTranslation(['global', 'landing']);
-  const { loading, error, data } = useQuery<LandingsQueryResponse>(LANDINGS_QUERY);
+  const { loading, error, data } =
+    useQuery<LandingsQueryResponse>(LANDINGS_QUERY);
 
   if (loading) return <LoadingOutlined />;
   if (error) return <Error />;
@@ -39,7 +40,7 @@ const LandingListPage = () => {
                 columns={tableColumns}
                 dataSource={tableDataSource}
                 pagination={{
-                  position: ['bottomCenter']
+                  position: ['bottomCenter'],
                 }}
                 className="ant-border-space"
               />
