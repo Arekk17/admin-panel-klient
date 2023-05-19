@@ -1,0 +1,57 @@
+image: node:16
+
+definitions:
+  caches:
+    npm: $HOME/.npm
+  steps:
+    - step: &build-dev-dependencies
+        name: Build dev npm dependencies
+        caches:
+          - npm
+          - node
+        script:
+          - npm install
+          - npm run build:dev
+          - apt-get update
+          - apt-get install ncftp
+          - ncftpput -v -u "$DEV_FTP_USERNAME" -p "$DEV_FTP_PASSWORD" -R $DEV_FTP_HOST $DEV_FTP_SITE_ROOT build/*
+          - echo Finished uploading /build files to $DEV_FTP_HOST$DEV_FTP_SITE_ROOT
+        artifacts: # defining build/ as an artifact
+          - build/**
+    - step: &build-stg-dependencies
+        trigger: manual
+        name: Build stg npm dependencies
+        caches:
+          - npm
+          - node
+        script:
+          - npm install
+          - npm run build:stg
+          - apt-get update
+          - apt-get install ncftp
+          - ncftpput -v -u "$STG_FTP_USERNAME" -p "$STG_FTP_PASSWORD" -R $STG_FTP_HOST $STG_FTP_SITE_ROOT build/*
+          - echo Finished uploading /build files to $STG_FTP_HOST$STG_FTP_SITE_ROOT
+        artifacts: # defining build/ as an artifact
+          - build/**
+    - step: &security-scan
+        name: Security Scan
+        script:
+        # Run a security scan for sensitive data.
+        # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+          - pipe: atlassian/git-secrets-scan:0.5.1
+pipelines:
+  branches:
+    master:
+      - parallel:
+          - step: *security-scan
+      - step:
+          <<: *build-dev-dependencies
+          name: Deploy DEV
+          deployment: dev-bejol-com-admin
+      - step:
+          <<: *build-stg-dependencies
+          name: Deploy STG
+          deployment: stg-bejol-com-admin
+  pull-requests:
+    '**':
+      - step: *security-scan
