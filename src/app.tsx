@@ -29,6 +29,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { AuthContext } from './context/auth-context';
 import Cookie from 'js-cookie';
+import LessonEditPage from './pages/lessons/edit/lesson-edit';
 
 const App = () => {
   const { getState }: any = useContext(AuthContext);
@@ -74,6 +75,8 @@ const App = () => {
         {/*Lesson */}
         <Route path="/lessons" element={<LessonListPage />} />
         <Route path="/lesson" element={<LessonCreatePage />} />
+        <Route path="/lesson/:id" element={<LessonEditPage />} />
+
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
